@@ -10,16 +10,58 @@
     --color-foreground: var(--foreground);
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
+    --animate-grow-progress: grow-progress linear forwards;
+    @keyframes grow-progress {
+        from {
+            inline-size: 0%;
+        }
+        to {
+            inline-size: 100%;
+        }
+    }
+    --animate-fade-out-down: fade-out-down linear forwards;
+    @keyframes fade-out-down {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(40%);
+        }
+    }
+    --animate-make-it-bigger: make-it-bigger linear forwards;
+    @keyframes make-it-bigger {
+        0% {
+            transform: translateY(0);
+        }
+        80% {
+            transform: translateY(-30%);
+        }
+        90% {
+            transform: translateY(-10%) scale(1.5);
+        }
+        100% {
+            transform: translateY(0) scale(2);
+            opacity: 0.3;
+            z-index: -1;
+        }
+    }
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --background: #0a0a0a;
         --foreground: #ededed;
-        
     }
 }
 
 body {
     @apply bg-background text-foreground min-h-dvh w-screen;
+}
+
+@custom-variant no-scroll-timeline {
+    @supports (not (animation-timeline: scroll())) {
+        @slot;
+    }
 }
