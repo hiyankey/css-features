@@ -3,6 +3,7 @@
 :root {
     --background: #ffffff;
     --foreground: #171717;
+    --container-size: 1200px;
 }
 
 @theme inline {
@@ -63,5 +64,16 @@ body {
 @custom-variant no-scroll-timeline {
     @supports (not (animation-timeline: scroll())) {
         @slot;
+    }
+}
+
+@layer utilities {
+    .slide-center {
+        transform: translateX(
+            calc(
+                max(var(--container-size), 100vw) / 2 -
+                    calc(max(var(--container-size), 100vw) / 2)
+            )
+        );
     }
 }
